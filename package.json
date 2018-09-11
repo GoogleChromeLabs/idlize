@@ -1,0 +1,33 @@
+{
+  "name": "idlize",
+  "version": "0.1.0",
+  "description": "Helper classes and methods for implementing the idle-until-urgent pattern",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "eslint *.mjs lib/*.mjs test/*-test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GoogleChromeLabs/idlize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GoogleChromeLabs/idlize/issues"
+  },
+  "author": {
+    "name": "Philip Walton",
+    "email": "philip@philipwalton.com",
+    "url": "http://philipwalton.com"
+  },
+  "keywords": [
+    "idle",
+    "until",
+    "urgent",
+    "idle-until-urget",
+    "requestIdleCallback",
+    "cancelIdleCallback"
+  ],
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-google": "^0.10.0"
+  }
+}

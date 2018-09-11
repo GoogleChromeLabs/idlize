@@ -1,0 +1,31 @@
+{
+  'root': true,
+  'env': {
+    'browser': true,
+    'es6': true,
+    'node': true,
+    'mocha': true
+  },
+  'globals': {
+    'assert': false,
+    'sinon': false,
+    'safari': false
+  },
+  'parserOptions': {
+    'ecmaVersion': 2018,
+    'sourceType': 'module'
+  },
+  'extends': [
+    'eslint:recommended',
+    'google'
+  ],
+  'rules': {
+    'max-len': [2, {
+      'code': 80,
+      'tabWidth': 2,
+      'ignoreUrls': true,
+      // Ignore `it()` blocks in tests.
+      'ignorePattern': 'it\(`'
+    }]
+  }
+}

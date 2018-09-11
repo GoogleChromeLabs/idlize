@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2018 Google Inc. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+
+</head>
+<body>
+  <div id="mocha"></div>
+  <!-- Mocha and Sinon stopped supporting older IE: -->
+  <!--[if IE 9]>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.1.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/5.1.0/sinon.min.js"></script>
+  <![endif]-->
+  <!--[if !IE]><!-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/6.1.5/sinon.min.js"></script>
+  <!--<![endif]-->
+
+  <!-- Chai works fine in all browsers -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.1.2/chai.min.js"></script>
+
+  <script>
+  mocha.ui('bdd');
+  mocha.timeout(60000);
+
+  // Expose chai's assert globally.
+  self.assert = chai.assert;
+  </script>
+
+  <script type="module" src="idle-callback-polyfills-test.mjs"></script>
+  <script type="module" src="defineIdleProperties-test.mjs"></script>
+  <script type="module" src="defineIdleProperty-test.mjs"></script>
+  <script type="module" src="IdleQueue-test.mjs"></script>
+  <script type="module" src="IdleValue-test.mjs"></script>
+
+  <!-- The bundled scripts for nomodule browsers -->
+  <script nomodule src="index.js"></script>
+
+  <script>
+  window.onload = function() {
+    var runner = mocha.run();
+    var failedTests = [];
+
+    runner.on('end', function(){
+      window.mochaResults = runner.stats;
+      window.mochaResults.reports = failedTests;
+    });
+
+    runner.on('fail', function(test, err){
+      var flattenTitles = function(test){
+        var titles = [];
+        while (test.parent.title){
+          titles.push(test.parent.title);
+          test = test.parent;
+        }
+        return titles.reverse();
+      };
+
+      failedTests.push({
+        name: test.title,
+        result: false,
+        message: err.message,
+        stack: err.stack,
+        titles: flattenTitles(test)
+      });
+    });
+  };
+  </script>
+</body>
+</html>
