@@ -18,9 +18,9 @@ import {IdleValue} from './IdleValue.mjs';
 
 
 /**
- * @param {Object} obj The object to define the property on.
+ * @param {!Object} obj The object to define the property on.
  * @param {string} prop The property name.
- * @param {Function} init An initialization function to by run idly.
+ * @param {!Function} init An initialization function to by run idly.
  */
 export const defineIdleProperty = (obj, prop, init) => {
   const idleValue = new IdleValue(init);

@@ -42,7 +42,7 @@ class IdleDealine {
  * callback function and runs it at the next idle period, passing in an
  * object with a `timeRemaining()` method.
  * @private
- * @param {Function} callback
+ * @param {!Function} callback
  * @return {number}
  */
 const requestIdleCallbackShim = (callback) => {
@@ -55,7 +55,7 @@ const requestIdleCallbackShim = (callback) => {
  * A minimal shim for the  cancelIdleCallback function. This accepts a
  * handle identifying the idle callback to cancel.
  * @private
- * @param {number} handle
+ * @param {number|null} handle
  */
 const cancelIdleCallbackShim = (handle) => {
   clearTimeout(handle);
@@ -65,7 +65,7 @@ const cancelIdleCallbackShim = (handle) => {
 /**
  * The native `requestIdleCallback()` function or `cancelIdleCallbackShim()`
  *.if the browser doesn't support it.
- * @param {Function} callback
+ * @param {!Function} callback
  * @return {number}
  */
 export const rIC = supportsRequestIdleCallback_ ?

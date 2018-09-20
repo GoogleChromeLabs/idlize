@@ -23,7 +23,7 @@ import {cIC, rIC} from './idle-callback-polyfills.mjs';
 export class IdleValue {
   /**
    * Accepts a function to initialize the value of a variable when idle.
-   * @param {Function} init
+   * @param {!Function} init
    */
   constructor(init) {
     this.init_ = init;

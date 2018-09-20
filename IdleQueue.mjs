@@ -33,9 +33,10 @@ export class IdleQueue {
   /**
    * Creates the IdleQueue instance and adds lifecycle event listeners to
    * run the queue if the page is hidden (with fallback behavior for Safari).
-   * @param {Object} [options]
-   * @param {boolean} [options.ensureTasksRun=false]
-   * @param {number} [options.defaultMinTaskTime=0]
+   * @param {{
+   *   ensureTasksRun: boolean,
+   *   defaultMinTaskTime: number,
+   * }=} param1
    */
   constructor({
     ensureTasksRun = false,
@@ -70,21 +71,17 @@ export class IdleQueue {
   }
 
   /**
-   * @param {Function} task
-   * @param {Object} [options]
-   * @param {number} [options.minTaskTime]
+   * @param {...*} args
    */
   pushTask(...args) {
-    this.addTask_('push', ...args);
+    this.addTask_(Array.prototype.push, ...args);
   }
 
   /**
-   * @param {Function} task
-   * @param {Object} [options]
-   * @param {number} [options.minTaskTime]
+   * @param {...*} args
    */
   unshiftTask(...args) {
-    this.addTask_('unshift', ...args);
+    this.addTask_(Array.prototype.unshift, ...args);
   }
 
   /**
@@ -115,7 +112,7 @@ export class IdleQueue {
   /**
    * Returns the state object for the currently running task. If no task is
    * running, null is returned.
-   * @return {Object}
+   * @return {?Object}
    */
   getState() {
     return this.state_;
@@ -147,19 +144,18 @@ export class IdleQueue {
   }
 
   /**
-   * @param {string} method Either 'push' or 'shift'.
-   * @param {Function} task
-   * @param {Object} [options]
-   * @param {number} [options.minTaskTime]
+   * @param {!Function} arrayMethod Either the Array.prototype{push|shift}.
+   * @param {!Function} task
+   * @param {{minTaskTime: number}=} param1
    * @private
    */
-  addTask_(method, task, {minTaskTime = this.defaultMinTaskTime_} = {}) {
+  addTask_(arrayMethod, task, {minTaskTime = this.defaultMinTaskTime_} = {}) {
     const state = {
       time: now(),
       visibilityState: document.visibilityState,
     };
 
-    this.taskQueue_[method]({state, task, minTaskTime});
+    arrayMethod.call(this.taskQueue_, {state, task, minTaskTime});
 
     this.scheduleTasksToRun_();
   }
@@ -187,7 +183,7 @@ export class IdleQueue {
    * If an `IdleDeadline` object is passed (as is with `requestIdleCallback`)
    * then the tasks are run until there's no time remaining, at which point
    * we yield to input or other script and wait until the next idle time.
-   * @param {IdleDeadline} [deadline]
+   * @param {IdleDeadline=} deadline
    * @private
    */
   runTasks_(deadline = undefined) {

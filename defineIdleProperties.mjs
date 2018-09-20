@@ -18,8 +18,8 @@ import {defineIdleProperty} from './defineIdleProperty.mjs';
 
 
 /**
- * @param {Object} obj The object to define the property on.
- * @param {Object<string, Function>} props A mapping of property names to
+ * @param {!Object} obj The object to define the property on.
+ * @param {!Object<string, !Function>} props A mapping of property names to
  *     initialization functions to be run idly.
  */
 export const defineIdleProperties = (obj, props) => {
