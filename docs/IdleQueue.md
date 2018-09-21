@@ -89,7 +89,7 @@ queue.pushTask(() => {
       <p><strong>Parameters:</strong></p>
       <ul>
         <li><code>task</code>: <em>(function(Object<{{time: number, visibilityState: string}}>))</em>
-          The task to add to the end of the queue.
+          The task to add to the beginning of the queue.
         </li>
         <li><code>options.minTaskTime</code>: <em>(number)</em>
           The minimum amount of idle time remaining in order for a task to be run. If no value is passed, the queue default is used.
