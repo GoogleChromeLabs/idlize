@@ -6,7 +6,7 @@
 
 The `IdleQueue` class is a helper that allows developers to implement the [*idle-until-urgent*](https://philipwalton.com/articles/idle-until-urgent/) pattern in their code. It's useful for apps that want to split up their logic into a sequence of functions and schedule them to run idly.
 
-This class offers a few benefits over regular usage of [`requestIdleCallback()`](https://developers.google.com/web/updates/2015/08/using-requestidlecallback):
+This class offers a few benefits over the regular usage of [`requestIdleCallback()`](https://developers.google.com/web/updates/2015/08/using-requestidlecallback):
 
 - The queue can be configured so all queued functions are guaranteed to run before the page is unloaded.
 - Queued tasks can be run immediately at any time.
@@ -72,7 +72,7 @@ queue.pushTask(() => {
         </li>
       </ul>
       <p>Adds a task to the end of the queue and schedules the queue to be run when next idle (if not already scheduled).</p>
-      <p>The the tasks is run, it's invoked with an object containing the following properties:</p>
+      <p>When the task is run, it's invoked with an object containing the following properties:</p>
       <ul>
         <li><code>time</code>: <em>(number)</em>
           The time (epoch time in milliseconds) when the task was added to the queue.
@@ -96,7 +96,7 @@ queue.pushTask(() => {
         </li>
       </ul>
       <p>Adds a task to the beginning of the queue and schedules the queue to be run when next idle (if not already scheduled).</p>
-      <p>The the tasks is run, it's invoked with an object containing the following properties:</p>
+      <p>When the task is run, it's invoked with an object containing the following properties:</p>
       <ul>
         <li><code>time</code>: <em>(number)</em>
           The time (epoch time in milliseconds) when the task was added to the queue.
@@ -141,4 +141,3 @@ queue.pushTask(() => {
     </td>
   </tr>
 </table>
-
