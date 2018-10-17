@@ -7,7 +7,7 @@ Helper classes and methods make it easier for developers to implement the [*idle
 You can install this library from npm by running:
 
 ```sh
-npm install -D idlize
+npm install idlize
 ```
 
 ## Usage
