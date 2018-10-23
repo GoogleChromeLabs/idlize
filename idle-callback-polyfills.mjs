@@ -22,7 +22,7 @@ const supportsRequestIdleCallback_ = typeof requestIdleCallback === 'function';
 /**
  * A minimal shim of the native IdleDeadline class.
  */
-class IdleDealine {
+class IdleDeadline {
   /** @param {number} initTime */
   constructor(initTime) {
     this.initTime_ = initTime;
@@ -46,7 +46,7 @@ class IdleDealine {
  * @return {number}
  */
 const requestIdleCallbackShim = (callback) => {
-  const deadline = new IdleDealine(now());
+  const deadline = new IdleDeadline(now());
   return setTimeout(() => callback(deadline), 0);
 };
 
