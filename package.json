@@ -1,6 +1,6 @@
 {
   "name": "idlize",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Helper classes and methods for implementing the idle-until-urgent pattern",
   "license": "Apache-2.0",
   "scripts": {
