@@ -10,6 +10,14 @@ You can install this library from npm by running:
 npm install idlize
 ```
 
+### Polyfills
+
+`requestIdleCallback` and `cancelIdleCallback` are not available in all browsers. If you would like to support older browsers,
+you will need to include a polyfill. For example, you may consider the following:
+
+- [A simpler and lighter requestidlecallback-polyfill library](https://github.com/pladaria/requestidlecallback-polyfill)
+- [A more robust, but heavier, requestIdleCallback library](https://www.npmjs.com/package/requestidlecallback)
+
 ## Usage
 
 This library is a collection of helper methods and classes (not a single bundle). As such, each helper should be imported separately. All public helpers are released at the level of the project, so they can be imported by directly referencing the helper's `.mjs` file.
