@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {cIC, rIC} from './idle-callback-polyfills.mjs';
+import {cIC, rIC} from './idle-callback.mjs';
 import {now} from './lib/now.mjs';
 import {queueMicrotask} from './lib/queueMicrotask.mjs';
 
