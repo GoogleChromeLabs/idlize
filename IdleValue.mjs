@@ -44,7 +44,7 @@ export class IdleValue {
    */
   getValue() {
     if (this.value_ === undefined) {
-      this.cancleIdleInit_();
+      this.cancelIdleInit_();
       this.value_ = this.init_();
     }
     return this.value_;
@@ -54,7 +54,7 @@ export class IdleValue {
    * @param {?} newValue
    */
   setValue(newValue) {
-    this.cancleIdleInit_();
+    this.cancelIdleInit_();
     this.value_ = newValue;
   }
 
@@ -62,7 +62,7 @@ export class IdleValue {
    * Cancels any scheduled requestIdleCallback and resets the handle.
    * @private
    */
-  cancleIdleInit_() {
+  cancelIdleInit_() {
     if (this.idleHandle_) {
       cIC(this.idleHandle_);
       this.idleHandle_ = null;
